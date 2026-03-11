@@ -1,19 +1,20 @@
-# Use a Python base image
-FROM python:3.9-slim-buster
+# Use Python base image
+FROM python:3.10-slim
 
-# Set the working directory in the container
-WORKDIR /app/backend
+# Set working directory
+WORKDIR /app
 
-# Copy the backend application code
-COPY ./app /app/backend/app
+# Copy requirements first (better layer caching)
+COPY backend/requirements.txt .
 
 # Install dependencies
-COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port the app runs on
-EXPOSE 8000
+# Copy backend code
+COPY backend /app
 
-# Run the FastAPI application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Railway expects the app to run on this port
+EXPOSE 8080
 
+# Start FastAPI
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
