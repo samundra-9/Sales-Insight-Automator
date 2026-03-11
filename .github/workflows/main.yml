@@ -1,0 +1,61 @@
+
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt
+
+      - name: Lint backend code
+        run: |
+          # Example linting command, replace with your actual linter (e.g., flake8, black)
+          # pip install flake8
+          # flake8 backend/app
+
+      - name: Run backend tests
+        run: |
+          # Example test command, replace with your actual test runner (e.g., pytest)
+          # pip install pytest
+          # pytest backend/app
+
+      - name: Build Docker image for backend
+        run: docker build -t sales-insight-automator-backend ./backend
+
+  # You can add a similar job for the frontend here if needed.
+  # For example:
+  # build-and-test-frontend:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '16'
+  #     - name: Install frontend dependencies
+  #       run: npm install
+  #       working-directory: frontend
+  #     - name: Lint frontend code
+  #       run: npm run lint
+  #       working-directory: frontend
+  #     - name: Run frontend tests
+  #       run: npm test
+  #       working-directory: frontend
+  #     - name: Build frontend
+  #       run: npm run build
+  #       working-directory: frontend

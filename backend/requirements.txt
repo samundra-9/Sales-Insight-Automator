@@ -1,0 +1,10 @@
+
+fastapi
+python-dotenv
+pandas
+openpyxl # For reading XLSX files
+python-multipart # For file uploads
+redis
+google-generativeai
+uvicorn
+httpx
