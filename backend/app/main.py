@@ -40,8 +40,10 @@ app = FastAPI(
 )
 
 # CORS Configuration
-origins = [os.getenv("FRONTEND_URL", "http://localhost:3000")]
-
+origins = [
+    "http://localhost:3000",
+    "https://sales-insight-automa-git-610dd7-samundra1614be23-3558s-projects.vercel.app",
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
