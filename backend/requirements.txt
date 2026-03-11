@@ -9,3 +9,4 @@ redis
 google-generativeai
 uvicorn
 httpx
+pydantic[email]
