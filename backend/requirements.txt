@@ -10,3 +10,4 @@ google-generativeai
 uvicorn
 httpx
 pydantic[email]
+resend
